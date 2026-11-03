@@ -6,6 +6,8 @@
 
 Android 10+. Download on your phone, open the APK, and allow installation from your browser or Files app when Android asks. This independent Fieldwatch-based app installs separately from Fieldwatch.
 
+This repository is private: sign in to GitHub with an account that has access before downloading. If the direct link shows 404, open [`dist/The-Watch.apk`](dist/The-Watch.apk) while signed in and choose **Download raw file**.
+
 - Create rooms, learn a baseline, and label familiar devices or nearby background signals.
 - Check later and review **Changes**, **Known room devices**, **Not observed this time**, and **Nearby / uncertain** separately.
 - Tap an observation to **Find nearby**, with fresh signal trends and optional sound/vibration.

@@ -4,6 +4,8 @@
 
 Version **1.0.0**, application ID `io.github.azizgjh.thewatch`, Android 10+ (API 29), approximately 12 MB. Independently signed release; installs separately from Fieldwatch. Download on your phone and open the APK from Downloads/Files. Android may require permission to install from that source.
 
+This repository is private. Sign in to GitHub before downloading; signed-out requests return 404. You can also open [the APK file page](https://github.com/Aziz-gjh/the-Watch/blob/main/dist/The-Watch.apk) and choose **Download raw file**.
+
 Checksum: [SHA256SUMS.txt](SHA256SUMS.txt).
 
 Release signing certificate SHA-256:

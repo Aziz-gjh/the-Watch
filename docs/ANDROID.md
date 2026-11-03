@@ -6,6 +6,8 @@ Independent Fieldwatch-based Android app, Android 10 or later, requiring Wi-Fi a
 
 Download [The-Watch.apk](https://github.com/Aziz-gjh/the-Watch/raw/refs/heads/main/dist/The-Watch.apk) on your phone. Open the downloaded APK and allow installation from your browser or Files app if Android asks. This is a sideloaded app, not a Play Store installation. It does not update itself. Future APK updates need the same signing key and a higher version code.
 
+The repository is private. Sign in to an authorized GitHub account first. A 404 while signed out does not mean the APK is missing. Alternatively open the APK's GitHub file page and tap **Download raw file**.
+
 The repository includes `dist/SHA256SUMS.txt` and signing-certificate details. Preserve the private signing key outside the repository for future updates; the public APK is signed with a dedicated The Watch key, not Fieldwatch's certificate.
 
 ## First room
