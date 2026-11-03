@@ -3,3 +3,11 @@ node_modules/
 test-results/
 *.log
 .DS_Store
+android/.gradle/
+android/.kotlin/
+android/**/build/
+android/local.properties
+android/.idea/
+*.jks
+*.keystore
+dist/*.idsig

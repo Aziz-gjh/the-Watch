@@ -1,5 +1,7 @@
 # Fieldwatch review and The Watch web plan
 
+Archived web-stage review. The project subsequently added an Android fork in `android/`; see [the current Android guide](ANDROID.md) and [upstream attribution](../android/UPSTREAM.md). Statements below about the web-only implementation describe that earlier stage.
+
 Reviewed 3 November 2026 against the public [Fieldwatch repository](https://github.com/OffGridPete/Fieldwatch). This is a focused review of its README, project structure, and observation export implementation, not a full code or security audit.
 
 ## What the original project does well

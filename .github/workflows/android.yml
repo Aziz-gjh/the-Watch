@@ -1,0 +1,56 @@
+name: Android build and tests
+on:
+  push:
+    paths: ['android/**', '.github/workflows/android.yml']
+  pull_request:
+    paths: ['android/**', '.github/workflows/android.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Test and build development APK
+        working-directory: android
+        run: bash gradlew :app:testDebugUnitTest :app:assembleDebug --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: The-Watch-development-debug
+          path: android/app/build/outputs/apk/debug/*.apk
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Android-test-results
+          path: android/app/build/test-results/**
+      - name: Build signed release when private signing secrets are configured
+        if: github.event_name != 'pull_request'
+        working-directory: android
+        env:
+          THEWATCH_KEYSTORE_BASE64: ${{ secrets.THEWATCH_KEYSTORE_BASE64 }}
+          THEWATCH_STORE_PASSWORD: ${{ secrets.THEWATCH_STORE_PASSWORD }}
+          THEWATCH_KEY_ALIAS: ${{ secrets.THEWATCH_KEY_ALIAS }}
+          THEWATCH_KEY_PASSWORD: ${{ secrets.THEWATCH_KEY_PASSWORD }}
+        shell: bash
+        run: |
+          if [ -z "$THEWATCH_KEYSTORE_BASE64" ]; then
+            echo 'Release signing secrets are not configured; development APK built above.'
+            exit 0
+          fi
+          trap 'rm -f "$RUNNER_TEMP/the-watch-release.jks"' EXIT
+          printf '%s' "$THEWATCH_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/the-watch-release.jks"
+          export THEWATCH_STORE_FILE="$RUNNER_TEMP/the-watch-release.jks"
+          bash gradlew :app:assembleRelease --no-daemon
+      - uses: actions/upload-artifact@v4
+        if: github.event_name != 'pull_request'
+        with:
+          name: The-Watch-signed-release
+          path: android/app/build/outputs/apk/release/app-release.apk
+          if-no-files-found: ignore

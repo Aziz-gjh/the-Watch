@@ -1,5 +1,24 @@
 # The Watch
 
+**The Watch for Android — Room Change Watch**
+
+[**Download the Android app → The-Watch.apk**](https://github.com/Aziz-gjh/the-Watch/raw/refs/heads/main/dist/The-Watch.apk)
+
+Android 10+. Download on your phone, open the APK, and allow installation from your browser or Files app when Android asks. This independent Fieldwatch-based app installs separately from Fieldwatch.
+
+- Create rooms, learn a baseline, and label familiar devices or nearby background signals.
+- Check later and review **Changes**, **Known room devices**, **Not observed this time**, and **Nearby / uncertain** separately.
+- Tap an observation to **Find nearby**, with fresh signal trends and optional sound/vibration.
+- Save room labels, notes and recent checks locally. Adjust the signal filter to reduce clutter.
+
+Signals pass through walls. This app compares observable radio identifiers; it cannot prove which room a device is inside, pinpoint its position, detect every device, or establish malicious activity. Private addresses may change. Room checks require fresh repeated readings and cannot silently replace your baseline.
+
+Read the [Android installation and usage guide](docs/ANDROID.md), [upstream attribution](android/UPSTREAM.md), and [download checksums](dist/SHA256SUMS.txt). Source is in [`android/`](android/). Existing advanced Fieldwatch scanner features remain available.
+
+---
+
+## Earlier web prototype (deferred)
+
 A private, browser-local workspace for reviewing Wi-Fi and Bluetooth LE observations. Inspired by [Fieldwatch](https://github.com/OffGridPete/Fieldwatch), independently implemented as a website.
 
 **This is a working web preview, not a live radio scanner.** Websites cannot replace Android's Wi-Fi scanning and broader radio access. Import a Fieldwatch log to review real observations, or explore the clearly labeled fictional sample session.
@@ -70,4 +89,4 @@ See [the Fieldwatch review and web roadmap](docs/PROJECT-REVIEW.md) for browser 
 
 The initial web version adds desktop review, notes, and watchlist functionality. Good next steps are interactive session comparison, evidence-based explanations for signature matches, export redaction controls, offline installation, and an optional live Android/hardware collector.
 
-Independent project; not an official Fieldwatch release. No upstream code or radio databases are bundled. See [LICENSE](LICENSE).
+The earlier web prototype is independently implemented. The Android app is an independent Fieldwatch fork with upstream code and lookup tables; see [Android attribution](android/UPSTREAM.md), [upstream license](android/LICENSE), and [third-party notices](android/NOTICE). New work is covered by the root [LICENSE](LICENSE).
