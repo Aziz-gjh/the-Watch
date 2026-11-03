@@ -1,0 +1,13 @@
+{
+  "name": "the-watch",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A browser-local workspace for Fieldwatch radio observations",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check app.js && node --check data.js && node --test tests/*.test.mjs"
+  },
+  "engines": { "node": ">=22" }
+}

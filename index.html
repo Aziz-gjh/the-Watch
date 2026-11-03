@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101815">
+  <meta name="description" content="The Watch — a private, local workspace for reviewing Wi-Fi and Bluetooth observations.">
+  <title>The Watch · Radio workspace</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="./"><span class="brand-icon">◎</span><span>the watch<span class="brand-sub">RADIO OBSERVATORY</span></span></a>
+    <div class="workspace-label">YOUR WORKSPACE</div>
+    <nav aria-label="Workspace">
+      <button class="nav-item active" data-view="all"><span>◫</span> Overview</button>
+      <button class="nav-item" data-view="WIFI"><span>⌁</span> Wi-Fi networks</button>
+      <button class="nav-item" data-view="BLE"><span>ᛒ</span> Bluetooth LE</button>
+      <button class="nav-item" data-view="saved"><span>☆</span> Watchlist <span id="saved-count" class="nav-count">0</span></button>
+    </nav>
+    <div class="sidebar-card"><span class="small-dot"></span> LOCAL BY DESIGN<p>Your observations stay in this browser. No account. No uploads.</p></div>
+    <button id="about" class="subtle-button">ⓘ How this works</button>
+    <a class="source-link" href="https://github.com/Aziz-gjh/the-Watch" target="_blank" rel="noreferrer">View project ↗</a>
+    <div class="version">THE WATCH / WEB PREVIEW 0.1</div>
+  </aside>
+  <main>
+    <header class="topbar"><span>Workspace <span class="crumb">/</span> <span id="breadcrumb">Overview</span></span><span class="local-badge"><span class="small-dot"></span> Browser local</span></header>
+    <section class="page-heading"><div><div class="eyebrow">A CLEARER PICTURE OF YOUR RADIO ENVIRONMENT</div><h1 id="page-title">Your surroundings, observed.</h1><p>Explore the signals. Keep the context. See what changes.</p></div><div class="heading-actions"><button id="export" class="button">↓ Export view</button><button id="import" class="button primary">＋ Import observations</button><input id="file" type="file" accept=".csv,.json,.jsonl,text/csv,application/json" hidden></div></section>
+    <div class="source-banner"><span class="source-label" id="source-label">SAMPLE SESSION</span><span id="source-description">A fictional field walk. Explore the workspace or import a Fieldwatch log.</span><button id="load-demo">Reset to sample ↗</button></div>
+    <p id="message" class="message" role="status" aria-live="polite"></p>
+    <section class="stats" aria-label="Session summary">
+      <article><div class="stat-label">Observed radios <span>◎</span></div><strong id="stat-total">0</strong><span class="stat-foot">Unique identifiers in this session</span></article>
+      <article><div class="stat-label">Wi-Fi networks <span>⌁</span></div><strong id="stat-wifi">0</strong><span class="stat-foot"><i class="legend-dot wifi"></i> Access point observations</span></article>
+      <article><div class="stat-label">Bluetooth LE <span>ᛒ</span></div><strong id="stat-ble">0</strong><span class="stat-foot"><i class="legend-dot ble"></i> Advertised radio observations</span></article>
+      <article><div class="stat-label">On your watchlist <span>☆</span></div><strong id="stat-saved">0</strong><span class="stat-foot">Radios you chose to follow</span></article>
+    </section>
+    <div class="overview-grid">
+      <section class="panel signal-panel"><div class="panel-heading"><div><h2>Signal landscape</h2><p>Latest received signal per radio</p></div><span class="tiny-label">SESSION SNAPSHOT</span></div><div id="landscape" class="landscape" aria-label="Signal distribution"></div><div class="chart-axis"><span>WEAK · −100 dBm</span><span>−70</span><span>−40</span><span>STRONG · −20 dBm</span></div><div class="chart-caption"><span><i class="legend-dot wifi"></i> Wi-Fi <i class="legend-dot ble"></i> Bluetooth LE</span><span>Signal strength ≠ distance</span></div></section>
+      <section class="panel context-panel"><div class="eyebrow">KNOW WHAT YOU’RE SEEING</div><h2>Observations.<br>With perspective.</h2><p>A radio name or signal is a clue, never proof of a device’s identity or intent.</p><button id="capabilities" class="text-button">What can a website observe? <span>↗</span></button><div class="context-line">◎ <span>Review offline exports from Fieldwatch</span></div></section>
+    </div>
+    <section class="panel inventory"><div class="panel-heading inventory-heading"><div><h2 id="inventory-title">Radio inventory <span id="result-count" class="count-pill">0</span></h2><p id="inventory-caption">Select a radio to review its details and add context.</p></div><label class="search"><span>⌕</span><input id="search" type="search" placeholder="Search name, vendor, identifier…" aria-label="Search radios"></label></div>
+      <div class="filter-bar"><div class="segmented" role="group" aria-label="Radio type"><button class="selected" data-kind="all">All radios</button><button data-kind="WIFI">Wi-Fi</button><button data-kind="BLE">Bluetooth LE</button></div><div class="filter-right"><label>Signal <select id="strength"><option value="all">Any strength</option><option value="strong">Strong (≥ −60)</option><option value="medium">Medium (−80 to −61)</option><option value="weak">Weak (&lt; −80)</option><option value="unknown">Unknown</option></select></label><label>Sort <select id="sort"><option value="signal">Strongest first</option><option value="recent">Last observed</option><option value="name">Name A–Z</option></select></label></div></div>
+      <div class="table-scroll"><table><thead><tr><th scope="col">RADIO / IDENTIFIER</th><th scope="col">TYPE</th><th scope="col">VENDOR</th><th scope="col">SIGNAL</th><th scope="col">LAST OBSERVED</th><th scope="col"><span class="sr-only">Watchlist</span>☆</th></tr></thead><tbody id="radios"></tbody></table></div><div id="empty" class="empty" hidden><h3>No radios match this view</h3><p>Try another filter, search term, or import a session.</p><button id="clear-filters" class="button">Clear filters</button></div><div class="table-footer"><span id="table-summary"></span><span>Receive. Review. Understand.</span></div>
+    </section>
+    <footer><span>Built for curiosity. Designed for privacy.</span><div><button id="clear-data" class="subtle-button">Clear local data</button><span>Inspired by <a href="https://github.com/OffGridPete/Fieldwatch" target="_blank" rel="noreferrer">Fieldwatch ↗</a></span></div></footer>
+  </main>
+  <dialog id="details"><div class="dialog-header"><span class="eyebrow">RADIO DETAILS</span><button class="close-button" aria-label="Close details">×</button></div><h2 id="detail-name"></h2><p id="detail-id" class="mono"></p><dl id="detail-fields"></dl><form id="note-form"><label for="note">Your notes</label><textarea id="note" rows="4" maxlength="2000" placeholder="Add a location hint or context for your next review…"></textarea><div class="dialog-actions"><button type="button" id="toggle-watch" class="button">☆ Add to watchlist</button><button class="button primary">Save notes</button></div></form><p class="fine-print">Notes and watchlist are stored in this browser. Identifiers can rotate; one identifier does not necessarily equal one physical device.</p></dialog>
+  <dialog id="help"><div class="dialog-header"><span class="eyebrow">THE WATCH / WEB PREVIEW</span><button class="close-button" aria-label="Close help">×</button></div><h2>A web workspace for field observations.</h2><p>This version reviews exported observations. It does not scan nearby radios or run detection algorithms.</p><h3>Bring your own session</h3><p>Import Fieldwatch’s <strong>Share log</strong> CSV or JSONL export, a JSON array of the same records, or a The Watch JSON export. Import replaces the current session after the entire file validates. Files are processed locally; maximum 10 MB and 50,000 observations.</p><h3>Why a collector is still needed</h3><p>Websites have no standard nearby Wi-Fi scanning API. Web Bluetooth provides limited, permission-based access on supported browsers, rather than Android’s passive scanning. A future companion collector could feed this workspace.</p><h3>Keep your data in your hands</h3><p>The session, notes, and watchlist are saved locally when browser storage is available. Export view downloads only the filtered radios, including their notes and identifiers. Clear local data removes this app’s saved workspace. Browser storage is not encrypted by this app.</p><p class="fine-print">No accounts, analytics, external fonts, map requests, or backend. Independently built; not an official Fieldwatch release.</p><a href="docs/PROJECT-REVIEW.md">Read the project review and roadmap ↗</a></dialog>
+</body>
+</html>
